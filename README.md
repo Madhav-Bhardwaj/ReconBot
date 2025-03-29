@@ -9,7 +9,7 @@
 
 <hr>
 
-> ReconBot is an advanced automated reconnaissance pipeline built for serious bug bounty professionals. It integrates leading open-source tools to perform deep asset discovery, active subdomain resolution, technology fingerprinting, historical URL extraction, JavaScript endpoint mapping, vulnerability pattern matching, and misconfiguration analysis — all organized into a clean, domain-specific workspace with minimal user input.
+> ReconBot is a powerful automated reconnaissance framework designed for hackers... It seamlessly integrates top open-source tools to conduct in-depth asset discovery, active subdomain enumeration, technology profiling, historical URL retrieval, JavaScript analysis, vulnerability scanning, and misconfiguration detection. Everything is streamlined into a structured, domain-specific workspace, minimizing manual effort while maximizing actionable intelligence. 🚀
 
 <br>
 
@@ -18,117 +18,32 @@
 
 
 ## Features
-- **Subdomain Enumeration**: Uses `subfinder` and `assetfinder` to find subdomains and `httpx` to filter active ones.
-- **Domain Resolution**: Resolves subdomains to IPs using `dnsx`.
-- **Technology Identification**: Identifies web technologies with `cdncheck`.
-- **URL Collection**: Aggregates URLs with `waybackurls`, `gau`, `katana`, `hakrawler`, and `urlfinder`.
-- **Endpoint Discovery**: Filters URLs for sensitive files, such as `.json`, `.db`, `.config`, `.txt`, `.log`, `.cache`, `.secret`, `.backup`, `.yml`, `.gz`, `.rar`, and `.zip`.
-- **JavaScript File Detection**: Extracts `.js` files for further analysis.
-- **Subdomain Takeover Detection**: Uses `subzy` to find potential subdomain takeovers.
-- **CORS Misconfiguration Check**: Uses `Corsy` to detect misconfigurations.
-- **Vulnerability Scanning**: Uses `nuclei` to scan for vulnerabilities.
-- **Open Redirect Finding**: Detects open redirect vulnerabilities by replacing query parameters and checking for redirections.
+- **Subdomain Enumeration** – Uses Subfinder and Assetfinder to discover subdomains, then filters active ones with httpx.
+- **Domain Resolution** – Resolves subdomains to IPs using dnsx.
+- **Technology Fingerprinting** – Identifies web technologies, including CDN detection, with cdncheck.
+- **URL Collection** – Gathers URLs using Waybackurls, GAU, Katana, Hakrawler, and URLFinder.
+- **Endpoint Discovery** – Extracts sensitive file paths like .json, .db, .config, .txt, .log, .cache, .secret, .backup, .yml, .gz, .rar, .zip.
+- **JavaScript Recon** – Collects .js files for deeper analysis.
+- Subdomain Takeover Detection – Detects takeover risks using Subzy.
+- CORS Misconfiguration Scan – Identifies misconfigurations with Corsy.
+- Vulnerability Scanning – Uses Nuclei to detect potential vulnerabilities.
+- Open Redirect Detection – Automatically tests for open redirect issues by modifying query parameters.
 
 
 # Installation
 1. Clone the repository:  
 ```bash
-   git clone https://github.com/vulncrax/craxify.git
-   cd craxify
-   bash install.sh
+   git clone https://github.com/Madhav-Bhardwaj/ReconBot.git
+   cd ReconBot
+   chmod +x install.sh
+   ./install.sh
 ```
-
-**TARGET OPTIONS**
- 
-| Parameter | Description |
-|------|-------------|
-| -h | Help |
-| -d | Target domian |
-| -c | contact  |
 
 # Usage
 
   ```console
-
-┌──(root@vulncrax)-[~/craxify]
-└─# craxify -h
-Usage: /usr/local/bin/craxify -d <domain>
-Options:
-  -d <domain>   Specify the target domain
-  -h            Show this help message
-  -c            Contact & Donate (Buy Me a Coffee)
-```
-
-```console
-
-     ______                _ ____     
-    / ____/________ __  __() __/_  __
-   / /   / ___/ __ ` |/_ / / /_/ / / /   Author: Vulncrax
-  / /___/ /  / /_/ />  </ / __/ /_/ /    https://www.youtube.com/@vulncrax 
-  \____/_/   \__,_/_/|_/_/_/  \__, /  
-                           /____/   
-                  
-
-✘ Target  https://vulnweb.com 
-
-[] Finding subdomains
-
-rest.vulnweb.com
-testaspnet.vulnweb.com
-restasp.vulnweb.com
-www.testasp.vulnweb.com
-testphp.vulnweb.com
-tetphp.vulnweb.com
-test.php.vulnweb.com
-blogger.com.vulnweb.com
-www.test.php.vulnweb.com
-test.vulnweb.com
-testaps.vulnweb.com
-httptestaspnet.vulnweb.com
-odincovo.vulnweb.com
-edu-rost.ruwww.vulnweb.com
-testapsnet.vulnweb.com
-ttestphp.vulnweb.com
-testap.vulnweb.com
-www.vulnweb.com
-www.testphp.vulnweb.com
-virus.vulnweb.com
-www.virus.vulnweb.com
-viruswall.vulnweb.com
-testaspx.vulnweb.com
-testasp.vulnweb.com
-testhtml5.vulnweb.com
-5cwww.vulnweb.com
-antivirus1.vulnweb.com
-edu-rost.rutestasp.vulnweb.com
-[] Filtering active subdomains...
-
-http://rest.vulnweb.com
-http://www.vulnweb.com
-http://testhtml5.vulnweb.com
-http://testphp.vulnweb.com
-http://testasp.vulnweb.com
-[] Resolving domains to IPs
-
-testasp.vulnweb.com
-www.vulnweb.com
-testphp.vulnweb.com
-testhtml5.vulnweb.com
-rest.vulnweb.com
-[] Identifying web technologies...
-
-http://testasp.vulnweb.com [200 OK] ASP_NET, Cookies[ASPSESSIONIDQSRSSDTS], Country[UNITED STATES][US], HTTPServer[Microsoft-IIS/8.5], IP[44.238.29.244], Microsoft-IIS[8.5], Title[acuforum forums], X-Powered-By[ASP.NET]
-http://www.vulnweb.com [200 OK] Country[UNITED STATES][US], HTTPServer[nginx/1.19.0], IP[44.228.249.3], Title[Acunetix Web Vulnerability Scanner - Test websites], nginx[1.19.0]                                                                                                                          
-http://rest.vulnweb.com [200 OK] Apache[2.4.25], Country[UNITED STATES][US], HTML5, HTTPServer[Debian Linux][Apache/2.4.25 (Debian)], IP[18.215.71.186], Meta-Author[Omer Citak], PHP[7.1.26], Title[Invicti Vulnerable REST API], X-Powered-By[PHP/7.1.26]
-ERROR Opening: http://testhtml5.vulnweb.com - Hostname not known: testhtml5.vulnweb.com
-http://testphp.vulnweb.com [200 OK] ActiveX[D27CDB6E-AE6D-11cf-96B8-444553540000], Adobe-Flash, Country[UNITED STATES][US], Email[wvs@acunetix.com], HTTPServer[nginx/1.19.0], IP[44.228.249.3], Object[http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0][clsid:D27CDB6E-AE6D-11cf-96B8-444553540000], PHP[5.6.40-38+ubuntu20.04.1+deb.sury.org+1], Script[text/JavaScript], Title[Home of Acunetix Art], X-Powered-By[PHP/5.6.40-38+ubuntu20.04.1+deb.sury.org+1], nginx[1.19.0]
-[] Running waybackurls
-```
-
-## Example Usage
-
-```bash
-craxify -d vulnweb.com
+chmod +x reconbot
+./reconbot -d <domain>
 ```
 
 ## Dependencies
@@ -150,9 +65,4 @@ craxify -d vulnweb.com
 - [Urless](https://github.com/xnl-h4ck3r/urless)
 - [Waybackurls](https://github.com/tomnomnom/waybackurls)
 - [Cdncheck](https://github.com/projectdiscovery/cdncheck)
-
-  <p align="center">
-<img src="https://github.com/user-attachments/assets/9ec3fed0-45ff-4cb3-988c-f8cd66e85082">
-</p>
-
 
