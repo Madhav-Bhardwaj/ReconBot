@@ -1,7 +1,7 @@
 
 <h2 align="center">
   <br>
-  Craxify <br> Automated Reconnaissance Framework for Bug Bounty Hunters
+  ReconBot <br> Automated Reconnaissance Framework for Hackers....
   <br>
 </h2>
 
@@ -9,12 +9,12 @@
 
 <hr>
 
-> Craxify is an advanced automated reconnaissance pipeline built for serious bug bounty professionals. It integrates leading open-source tools to perform deep asset discovery, active subdomain resolution, technology fingerprinting, historical URL extraction, JavaScript endpoint mapping, vulnerability pattern matching, and misconfiguration analysis — all organized into a clean, domain-specific workspace with minimal user input.
+> ReconBot is an advanced automated reconnaissance pipeline built for serious bug bounty professionals. It integrates leading open-source tools to perform deep asset discovery, active subdomain resolution, technology fingerprinting, historical URL extraction, JavaScript endpoint mapping, vulnerability pattern matching, and misconfiguration analysis — all organized into a clean, domain-specific workspace with minimal user input.
 
 <br>
 
 
- <a href="https://github.com/vulncrax/craxify"><img src="https://github.com/vulncrax/craxify/blob/main/craxify.png" alt="Craxify" ></a>
+ <img src="https://github.com/Madhav-Bhardwaj/ReconBot/blob/main/ReconBot.png">
 
 
 ## Features
