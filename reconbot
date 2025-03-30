@@ -129,9 +129,6 @@ sudo cat $DOMAIN_DIR/endpoints.txt | grep -E "\.js$" | sudo tee $DOMAIN_DIR/js.t
 printf "${BOLD}${GREEN}[*] Running Nuclei${NORMAL}\n\n"
 nuclei -retries 2 -silent -l $DOMAIN_DIR/endpoints.txt | sudo tee $DOMAIN_DIR/nuclei.txt
 
-cat $DOMAIN_DIR/endpoints.txt | gf redirect | uro | sort -u | sudo tee $DOMAIN_DIR/redirect_params.txt
-sudo cat $DOMAIN_DIR/redirect_params.txt | qsreplace "https://evil.com" | xargs -I {} curl -s -o /dev/null -w "%{url_effective} -> %{redirect_url}\n" {} | grep https://evil.com
-
 printf "${BOLD}${GREEN}[*] Checking CORS misconfiguration${NORMAL}\n\n"
 python3 ./ReconBot/tools/Corsy/corsy.py -i "$DOMAIN_DIR/resolved.txt"
 
