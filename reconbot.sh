@@ -127,7 +127,7 @@ printf "${BOLD}${GREEN}[*] Filtering JS files${NORMAL}\n\n"
 sudo cat $DOMAIN_DIR/endpoints.txt | grep -E "\.js$" | sudo tee $DOMAIN_DIR/js.txt
 
 printf "${BOLD}${GREEN}[*] Running Nuclei${NORMAL}\n\n"
-nuclei -dast -retries 2 -silent -l $DOMAIN_DIR/endpoints.txt | sudo tee $DOMAIN_DIR/nuclei.txt
+nuclei -retries 2 -silent -l $DOMAIN_DIR/endpoints.txt | sudo tee $DOMAIN_DIR/nuclei.txt
 
 cat $DOMAIN_DIR/endpoints.txt | gf redirect | uro | sort -u | sudo tee $DOMAIN_DIR/redirect_params.txt
 sudo cat $DOMAIN_DIR/redirect_params.txt | qsreplace "https://evil.com" | xargs -I {} curl -s -o /dev/null -w "%{url_effective} -> %{redirect_url}\n" {} | grep https://evil.com
