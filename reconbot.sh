@@ -133,9 +133,7 @@ cat $DOMAIN_DIR/endpoints.txt | gf redirect | uro | sort -u | sudo tee $DOMAIN_D
 sudo cat $DOMAIN_DIR/redirect_params.txt | qsreplace "https://evil.com" | xargs -I {} curl -s -o /dev/null -w "%{url_effective} -> %{redirect_url}\n" {} | grep https://evil.com
 
 printf "${BOLD}${GREEN}[*] Checking CORS misconfiguration${NORMAL}\n\n"
-python3 $HOME/tools/Corsy/corsy.py -i "$DOMAIN_DIR/resolved.txt"
-
-cd $HOME/ReconBot/results/$domain
+python3 ./ReconBot/tools/Corsy/corsy.py -i "$DOMAIN_DIR/resolved.txt"
 
 # Completion Message
-printf "${BOLD}${GREEN}[*] Scan completed! Results saved to $HOME/ReconBot/results/$domain ${NORMAL}\n\n"
+printf "${BOLD}${GREEN}[*] Scan completed! Results saved to $HOME/ReconBot-Result/results/$domain ${NORMAL}\n\n"
