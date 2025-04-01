@@ -99,6 +99,8 @@ sudo cat $DOMAIN_DIR/subdomains.txt | sudo cdncheck -resp  -o $DOMAIN_DIR/web-te
 # Collecting URLs
 printf "${BOLD}${GREEN}[] Running waybackurls${NORMAL}\n\n"
 cat "$DOMAIN_DIR/resolved.txt" | waybackurls | sudo tee "$DOMAIN_DIR/wayback.txt"
+cat "$DOMAIN_DIR/wayback.txt" | sort -u | sudo tee "$DOMAIN_DIR/wayback_endpoint.txt"
+sudo rm -rf "DOMAIN_DIR/wayback.txt"
 cat $DOMAIN_DIR/resolved.txt  | sudo cdncheck -resp -o $DOMAIN_DIR/web-technologies.txt
 
 printf "${BOLD}${GREEN}[] Running Gau${NORMAL}\n\n"
@@ -112,11 +114,8 @@ sudo cat $DOMAIN_DIR/resolved.txt | hakrawler | sudo tee $DOMAIN_DIR/hakrawler.t
 printf "${BOLD}${GREEN}[*] Running Urlfinder${NORMAL}\n\n"
 sudo cat $DOMAIN_DIR/resolved.txt | urlfinder | sudo tee $DOMAIN_DIR/urlfinder.txt
 
-printf "${BOLD}${GREEN}[*] Filtering endpoints${NORMAL}\n\n"
-cat $DOMAIN_DIR/*.txt | sort -u | uro | urldedupe | urless | sudo tee $DOMAIN_DIR/endpoints.txt
-
 printf "${BOLD}${GREEN}[*] Finding sensitive files${NORMAL}\n\n"
-sudo cat $DOMAIN_DIR/endpoints.txt | grep -E "\.txt|\.log|\.cache|\.secret|\.db|\.backup|\.yml|\.json|\.gz|\.rar|\.zip|\.config|\json" | sudo tee $DOMAIN_DIR/endpoints_result.txt
+sudo cat $DOMAIN_DIR/*.txt | grep -E "\.txt|\.log|\.cache|\.secret|\.db|\.backup|\.yml|\.json|\.gz|\.rar|\.zip|\.config|\json" | sudo tee $DOMAIN_DIR/endpoints_result.txt
 
 printf "${BOLD}${GREEN}[*] Finding subdomain takeover... ${NORMAL}\n\n"
 subzy run --targets $DOMAIN_DIR/subdomains.txt --concurrency 100 --verify_ssl | sudo tee subzy.txt
@@ -127,7 +126,7 @@ printf "${BOLD}${GREEN}[*] Filtering JS files${NORMAL}\n\n"
 sudo cat $DOMAIN_DIR/endpoints.txt | grep -E "\.js$" | sudo tee $DOMAIN_DIR/js.txt
 
 printf "${BOLD}${GREEN}[*] Running Nuclei${NORMAL}\n\n"
-nuclei -retries 2 -silent -l $DOMAIN_DIR/endpoints.txt | sudo tee $DOMAIN_DIR/nuclei.txt
+nuclei -silent -l $DOMAIN_DIR/endpoints.txt | sudo tee $DOMAIN_DIR/nuclei.txt
 
 printf "${BOLD}${GREEN}[*] Checking CORS misconfiguration${NORMAL}\n\n"
 python3 ./ReconBot/tools/Corsy/corsy.py -i "$DOMAIN_DIR/resolved.txt"
